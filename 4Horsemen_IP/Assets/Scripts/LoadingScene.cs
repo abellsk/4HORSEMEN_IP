@@ -8,7 +8,7 @@ public class LoadingScene : MonoBehaviour
 {
     public GameObject LoadingScreen;
     public Image LoadingBarFill;
-    //public float speed;
+    public float speed;
 
 
     public void LoadScene(int sceneId)
@@ -24,7 +24,7 @@ public class LoadingScene : MonoBehaviour
 
         while (!operation.isDone)
         {
-            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            float progressValue = Mathf.Clamp01(operation.progress / speed);
             LoadingBarFill.fillAmount = progressValue;
 
             yield return null;
