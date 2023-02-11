@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
         // Spawn a new bullet at the position of bulletOrgin
         GameObject newBullet = Instantiate(bulletPrefab, bulletOrigin.position, bulletOrigin.rotation);
 
-        newBullet.GetComponent<Rigidbody>().AddForce(bulletOrigin.forward * 50f);
+        newBullet.GetComponent<Rigidbody>().AddForce(bulletOrigin.forward * 500f);
     }
 
 }
