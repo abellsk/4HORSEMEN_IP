@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "980943232687",
+    "firebase_url": "https://escaperoom-19566-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "escaperoom-19566",
+    "storage_bucket": "escaperoom-19566.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980943232687:android:8f8f15f44a6adb7e29fe5a",
+        "android_client_info": {
+          "package_name": "com.company.EscapeTheRooms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980943232687-1n2aj18t58vdn8enbnl532ohra60omv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJlUU53TYQqGThuo7aCd5yHp1NwmNq4oA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980943232687-1n2aj18t58vdn8enbnl532ohra60omv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
