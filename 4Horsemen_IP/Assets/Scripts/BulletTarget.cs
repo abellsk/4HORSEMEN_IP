@@ -9,6 +9,11 @@ public class BulletTarget : MonoBehaviour
     bool allDead = false;
 
     void onCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Target")
+        {
+            Debug.Log("Target has been hit");
+            targetDown++;
+        }
         if (collision.gameObject.tag == "Target1")
         {
             Debug.Log("Target has been hit");
@@ -19,10 +24,9 @@ public class BulletTarget : MonoBehaviour
             Debug.Log("Target has been hit");
             targetDown++;
         }
-        if (collision.gameObject.tag == "Target3")
+        if (collision.gameObject.tag == "playarea")
         {
-            Debug.Log("Target has been hit");
-            targetDown++;
+            Debug.Log("Target has hit the floor");
         }
     }
 
@@ -37,6 +41,6 @@ public class BulletTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log("Target has hit the floor");
     }
 }
