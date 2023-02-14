@@ -11,15 +11,11 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
+        Debug.Log("hello");
         // Spawn a new bullet at the position of bulletOrgin
         GameObject newBullet = Instantiate(bulletPrefab, bulletOrigin.position, bulletOrigin.rotation);
 
-        newBullet.GetComponent<Rigidbody>().AddForce(bulletOrigin.forward * 500f);
-    }
-
-    void onCollisionEnter(Collision collision)
-    {
-
-    }
+        newBullet.GetComponent<Rigidbody>().AddForce(bulletOrigin.forward * 1500f);
+    } 
 
 }

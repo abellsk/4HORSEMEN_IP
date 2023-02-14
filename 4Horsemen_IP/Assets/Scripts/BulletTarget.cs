@@ -8,7 +8,7 @@ public class BulletTarget : MonoBehaviour
     int targetDown = 0;
     bool allDead = false;
 
-    void onCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Target")
         {
             Debug.Log("Target has been hit");
