@@ -237,7 +237,7 @@ public class AuthManager : MonoBehaviour
     public bool ValidatePassword(string password)
     {
         bool isValid = false;
-        if (password != "" && password.Length >= 3)
+        if (password != "" && password.Length >= 6)
         {
             isValid = true;
         }
@@ -260,7 +260,7 @@ public class AuthManager : MonoBehaviour
                     errorMsg += "Email already in use";
                     break;
                 case AuthError.WeakPassword:
-                    errorMsg += "Password is weak. Use at least 3 characters";
+                    errorMsg += "Password is weak. Use at least 6 characters";
                     break;
                 case AuthError.MissingPassword:
                     errorMsg += "password is missing";

@@ -18,7 +18,7 @@ public class BulletTarget : MonoBehaviour
             Debug.Log("Target has been hit");
             Destroy(GameObject.FindWithTag("Target"));
             targetDown++;
-            GameManager.instance.showText();
+            //GameManager.instance.showText();
         }
         if (collision.gameObject.tag == "Target1")
         {
