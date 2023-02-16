@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BulletTarget : MonoBehaviour
 {
     public GameObject targetShot;
     public GameObject targetShot2;
+    public GameObject targetShot3;
     int targetDown = 0;
     bool allDead = false;
     public TextMeshProUGUI playerScoreText1; //show current score in screen 1

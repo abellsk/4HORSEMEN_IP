@@ -1933,7 +1933,6 @@ MonoBehaviour:
   bulletOrigin: {fileID: 2120944749}
   bulletPrefab: {fileID: 4479139430538715596, guid: 59ce436930184714999e6960bd90c5e6,
     type: 3}
-  targetShot: {fileID: 0}
 --- !u!4 &730277338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6420017376532566468, guid: 11301ce29c6990a439d57794655c64d2,
@@ -2562,7 +2561,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2580,7 +2579,7 @@ AudioSource:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
+      value: 1.0109863
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2595,7 +2594,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5774,6 +5773,7 @@ GameObject:
   - component: {fileID: 1961564343}
   - component: {fileID: 1961564345}
   - component: {fileID: 1961564344}
+  - component: {fileID: 1961564346}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5839,6 +5839,25 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &1961564346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961564342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bf48c839e3c5e459349e10d612649e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetShot: {fileID: 92751219}
+  targetShot2: {fileID: 1508440923}
+  targetShot3: {fileID: 268570023}
+  playerScoreText1: {fileID: 2038373008}
+  playerScoreText2: {fileID: 1434289729}
+  playerScoreText3: {fileID: 1501682943}
+  playerScoreText4: {fileID: 1290368582}
 --- !u!1 &1973285114
 GameObject:
   m_ObjectHideFlags: 0
