@@ -9,12 +9,8 @@ public class BulletTarget : MonoBehaviour
     public GameObject targetShot;
     public GameObject targetShot2;
     public GameObject targetShot3;
-    int targetDown = 0;
+    public static int targetDown = 0;
     bool allDead = false;
-    public TextMeshProUGUI playerScoreText1; //show current score in screen 1
-    public TextMeshProUGUI playerScoreText2; //show current score in screen 2
-    public TextMeshProUGUI playerScoreText3; //show current score in screen 3
-    public TextMeshProUGUI playerScoreText4; //show current score in screen 4
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Target")
@@ -22,10 +18,7 @@ public class BulletTarget : MonoBehaviour
             Debug.Log("Target has been hit");
             Destroy(GameObject.FindWithTag("Target"));
             targetDown++;
-            playerScoreText1.text = targetDown.ToString();
-            playerScoreText2.text = targetDown.ToString();
-            playerScoreText3.text = targetDown.ToString();
-            playerScoreText4.text = targetDown.ToString();
+            GameManager.instance.showText();
         }
         if (collision.gameObject.tag == "Target1")
         {
