@@ -65,7 +65,7 @@ Material:
     - _Metalic: 0.246
     - _Metallic: 0
     - _NormalStrenght: 0.01
-    - _NormalStrength: 4.65
+    - _NormalStrength: 8
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReflectionStrenght: 0.05

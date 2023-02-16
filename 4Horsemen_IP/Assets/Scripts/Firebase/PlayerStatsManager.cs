@@ -10,9 +10,10 @@ using JetBrains.Annotations;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    public TextMeshProUGUI playerXP;
+    public TextMeshProUGUI timeInRoom1;
+    public TextMeshProUGUI timeInRoom2;
+    public TextMeshProUGUI timeInRoom3;
     public TextMeshProUGUI playerTimeSpent;
-    public TextMeshProUGUI playerHighScore;
     public TextMeshProUGUI playerLastPlayed;
     public TextMeshProUGUI playerName;
 
@@ -37,10 +38,11 @@ public class PlayerStatsManager : MonoBehaviour
         {
 
             Debug.Log("playerstats... : " + playerStats.PlayerStatsToJson());
-
-            playerXP.text = playerStats.xp + "xp";
+            
+            timeInRoom1.text = playerStats.timeSpentRoom1 + "secs";
+            timeInRoom2.text = playerStats.timeSpentRoom2 + "secs";
+            timeInRoom3.text = playerStats.timeSpentRoom3 + "secs";
             playerTimeSpent.text = playerStats.totalTimeSpent + "secs";
-            playerHighScore.text = playerStats.highscore.ToString();
             playerLastPlayed.text = UnixToDateTime(playerStats.updatedOn);
 
         }
@@ -54,9 +56,10 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void ResetStatsUI()
     {
-        playerXP.text = "0 XP";
+        timeInRoom1.text = "0";
+        timeInRoom2.text = "0";
+        timeInRoom3.text = "0";
         playerTimeSpent.text = "0";
-        playerHighScore.text = "0";
         playerLastPlayed.text = "0";
     }
 

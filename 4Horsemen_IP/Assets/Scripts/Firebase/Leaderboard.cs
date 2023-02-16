@@ -7,7 +7,7 @@ using System;
 public class Leaderboard
 {
     public string userName;
-    public int highScore;
+    public int totalTimeSpent;
     public long updatedOn;
 
     public Leaderboard()
@@ -15,10 +15,10 @@ public class Leaderboard
 
     }
 
-    public Leaderboard(string userName, int highScore)
+    public Leaderboard(string userName, int totalTimeSpent)
     {
         this.userName = userName;
-        this.highScore = highScore;
+        this.totalTimeSpent = totalTimeSpent;
         this.updatedOn = GetTimeUnix();
     }   
 

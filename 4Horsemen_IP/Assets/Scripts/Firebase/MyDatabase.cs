@@ -37,7 +37,7 @@ public class MyDatabase : MonoBehaviour
 
     }
     //create a new entry if it is the first time playing and update if there already is one
-    public void UpdatePlayerStats(string uuid, int score, int xp, int time, string displayName)
+    public void UpdatePlayerStats(string uuid, int room1, int room2, int room3, int time, string displayName)
     {
         Query playerQuery = dbPlayerStatsReference.Child(uuid);
 
@@ -54,15 +54,20 @@ public class MyDatabase : MonoBehaviour
                 {
                     //creating a temp object sp which stores info from the player stats
                     PlayerStats sp = JsonUtility.FromJson<PlayerStats>(playerStats.GetRawJsonValue());
-                    sp.xp += xp;
+                    sp.timeSpentRoom1 += room1;
+                    sp.timeSpentRoom2 += room2;
+                    sp.timeSpentRoom3 += room3;
                     sp.totalTimeSpent += time;
-                    sp.updatedOn = sp.GetTimeUnix();
+                    //sp.updatedOn = sp.GetTimeUnix();
                     
                     //check if new high score
-                    if(score > sp.highscore)
+                    if(room1 > sp.timeSpentRoom1 || room2 > sp.timeSpentRoom2 || room3 > sp.timeSpentRoom3 || time > sp.totalTimeSpent )
                     {
-                        sp.highscore = score;
-                        UpdatePlayerLeaderboardEntry(uuid, sp.highscore, sp.updatedOn);
+                        sp.timeSpentRoom1 = room1;
+                        sp.timeSpentRoom2= room2;
+                        sp.timeSpentRoom3 = room3;
+                        sp.totalTimeSpent = time;
+                        UpdatePlayerLeaderboardEntry(uuid, sp.timeSpentRoom1, sp.timeSpentRoom2, sp.timeSpentRoom3, sp.totalTimeSpent, sp.updatedOn);
                     }
 
                     //path: playerStats/$uuid
@@ -70,9 +75,9 @@ public class MyDatabase : MonoBehaviour
                 }
                 else
                 {
-                    PlayerStats sp = new PlayerStats(displayName, score, xp, time);
+                    PlayerStats sp = new PlayerStats(displayName, room1, room2, room3, time);
                     
-                    PlayerStats lb = new PlayerStats(displayName, score);
+                    PlayerStats lb = new PlayerStats(displayName, room1, room2, room3);
 
                     dbPlayerStatsReference.Child(uuid).SetRawJsonValueAsync(sp.PlayerStatsToJson());
                     dbLeaderboardsReference.Child(uuid).SetRawJsonValueAsync(lb.PlayerStatsToJson());
@@ -82,17 +87,20 @@ public class MyDatabase : MonoBehaviour
         });
 
     }
-    public void UpdatePlayerLeaderboardEntry(string uuid, int highscore, long updatedOn)
+    public void UpdatePlayerLeaderboardEntry(string uuid, int room1, int room2, int room3, int time, long updatedOn)
     {
-        //path: leaderboards/$uuid/highScore
+        //path: leaderboards/$uuid/timeInRoom1
         //path: leaderboards/$uuid/updatedOn
-        dbLeaderboardsReference.Child(uuid).Child("highscore").SetValueAsync(highscore);
+        dbLeaderboardsReference.Child(uuid).Child("timeInRoom1").SetValueAsync(room1);
+        dbLeaderboardsReference.Child(uuid).Child("timeInRoom2").SetValueAsync(room2);
+        dbLeaderboardsReference.Child(uuid).Child("timeInRoom3").SetValueAsync(room3);
+        dbLeaderboardsReference.Child(uuid).Child("totalTimeSpent").SetValueAsync(time);
         dbLeaderboardsReference.Child(uuid).Child("updatedOn").SetValueAsync(updatedOn);
     }
 
     public async Task<List<Leaderboard>> GetLeaderboard(int limit = 6)
     {
-        Query q = dbLeaderboardsReference.OrderByChild("score").LimitToLast(limit);
+        Query q = dbLeaderboardsReference.OrderByChild("timeTaken").LimitToLast(limit);
         List<Leaderboard> leaderboardList = new List<Leaderboard>();
         await dbLeaderboardsReference.GetValueAsync().ContinueWithOnMainThread(task =>
         {
@@ -115,7 +123,7 @@ public class MyDatabase : MonoBehaviour
                         //adding items to the list
                         leaderboardList.Add(lb);
 
-                        //Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Highscore {2}", rankCounter, lb.userName, lb.highScore);
+                        //Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Time Spent {2}", rankCounter, lb.userName, lb.totalTimeSpent);
                     }
 
                     //list from ascending to decending order
@@ -124,7 +132,7 @@ public class MyDatabase : MonoBehaviour
                     //for each Leaderboard object inside our leaderboard list
                     foreach(Leaderboard lb in leaderboardList)
                     {
-                        Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Highscore {2}", rankCounter, lb.userName, lb.highScore);
+                        Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Time Spent {2}", rankCounter, lb.userName, lb.totalTimeSpent);
                         rankCounter++;
                     }
                 }
