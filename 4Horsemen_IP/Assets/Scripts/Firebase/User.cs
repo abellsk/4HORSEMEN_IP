@@ -6,7 +6,6 @@ using System;
 public class User
 {
     public string userName;
-    public string displayName;
     public string email;
     public bool active;
     public long lastLoggedIn;
@@ -16,11 +15,10 @@ public class User
     {
 
     }
-    public User(string userName, string displayName, string email, bool active = true)
+    public User(string userName, string email, bool active = true)
     {
         //this.region = region;
         this.userName = userName;
-        this.displayName = displayName;
         this.email = email;
         this.active = active;
 
@@ -37,10 +35,10 @@ public class User
         return JsonUtility.ToJson(this);
     }
 
+    /**
     public string PrintPlayer()
     {
-        return String.Format("Player details: {0}\n Username: {1}\n Email: {2}\n Active: {3}",
-            this.displayName, this.userName, this.email, this.active
-            );
+        return String.Format("Player details: {0}\n Username: {1}\n Email: {2}\n Active: {3}", this.userName, this.email, this.active);
     }
+    **/
 }

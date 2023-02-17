@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 //using UnityEditor.PackageManager;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class AuthManager : MonoBehaviour
 {
@@ -29,8 +30,8 @@ public class AuthManager : MonoBehaviour
     public TextMeshProUGUI errorMsgContent;
 
 
-
     public static GameManager instance;
+    public GameManager gameManager;
 
     //transition
     public Animator transition;
@@ -67,10 +68,12 @@ public class AuthManager : MonoBehaviour
                 errorMsgContent.gameObject.SetActive(false);
 
                 string username = usernameInput.text;
-                await CreateNewSimplePlayer(newPlayer.UserId, username, username, newPlayer.Email);
+                await CreateNewSimplePlayer(newPlayer.UserId, username, newPlayer.Email);
                 await UpdatePlayerDisplayName(username);
                 GameManager.instance.signUpPage.SetActive(false);
                 GameManager.instance.loggedInPage.SetActive(true);
+                gameManager.inputFields.SetActive(false);
+                gameManager.userName.text = username + "!";
                 //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
             }   
         }
@@ -104,11 +107,14 @@ public class AuthManager : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
+                string username = usernameInput.text;
                 errorMsgContent.gameObject.SetActive(false);
                 newPlayer = task.Result;
                 Debug.LogFormat("Welcome to the game {0} {1} ", newPlayer.UserId, newPlayer.Email);
-                GameManager.instance.signUpPage.gameObject.SetActive(false);
-                GameManager.instance.loggedInPage.gameObject.SetActive(true);
+                GameManager.instance.signUpPage.SetActive(false);
+                GameManager.instance.loggedInPage.SetActive(true);
+                gameManager.inputFields.SetActive(false);
+                gameManager.userName.text = username + "!";
                 // do anything you want after player creation eg. create new player
             }
 
@@ -116,10 +122,10 @@ public class AuthManager : MonoBehaviour
         return newPlayer;
     }
 
-    public async Task CreateNewSimplePlayer(string uuid, string displayName, string userName, string email)
+    public async Task CreateNewSimplePlayer(string uuid, string userName, string email)
     {
-        User newPlayer = new User(displayName, userName, email);
-        Debug.LogFormat("Player details: {0}", newPlayer.PrintPlayer());
+        User newPlayer = new User(userName, email);
+        //Debug.LogFormat("Player details: {0}", newPlayer.PrintPlayer());
         //root/players/uuid
         await dbReference.Child("players/" + uuid).SetRawJsonValueAsync(newPlayer.SimpleGamePlayerToJson());
     }
@@ -129,9 +135,39 @@ public class AuthManager : MonoBehaviour
         return auth.CurrentUser.DisplayName;
     }
 
+    public void GetCurrentUserName()
+    {
+        Query playerQuery = dbReference.Child(GameManager.instance.userName.text);
+        playerQuery.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("sorry, there has been an error retrieving your data, Error: " + task.Exception);
+
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot players = task.Result;
+                Debug.Log(players.ChildrenCount); // returns "1", (it should be "3")
+
+                if (players.Exists)
+                {
+                    PlayerStats uN = JsonUtility.FromJson<PlayerStats>(players.GetRawJsonValue());
+                    string username = uN.userName;
+                    Debug.Log(GameManager.instance.userName.text);
+                    gameManager.loggedInPage.SetActive(true);
+                    gameManager.userName.text = username + "!";
+                    gameManager.logInPage.SetActive(false);
+                    gameManager.inputFields.SetActive(false);
+                }
+
+            }
+        });
+    }
     public void LogInUser()
     {
-        Debug.Log("Logging In method...");
+        //Debug.Log("Logging In method...");
         string email = emailField.text.Trim();
         string password = passwordField.text.Trim();
         if (ValidateEmail(email) && ValidatePassword(password))
@@ -150,9 +186,8 @@ public class AuthManager : MonoBehaviour
                 {
                     errorMsgContent.gameObject.SetActive(false);
                     FirebaseUser currentPlayer = task.Result;
-                    Debug.LogFormat("Welcome to NBA2K {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
-                    GameManager.instance.logInPage.SetActive(false);
-                    GameManager.instance.loggedInPage.SetActive(true);
+                    Debug.LogFormat("Welcome to Escape The Room {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
+                    GetCurrentUserName();
                     //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
                 }
             });
@@ -182,13 +217,13 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    public async Task UpdatePlayerDisplayName(string displayName)
+    public async Task UpdatePlayerDisplayName(string userName)
     {
         if (auth.CurrentUser != null)
         {
             UserProfile profile = new UserProfile
             {
-                DisplayName = displayName
+                DisplayName = userName
             };
             await auth.CurrentUser.UpdateUserProfileAsync(profile).ContinueWithOnMainThread(task =>
             {

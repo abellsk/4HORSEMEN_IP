@@ -2929,6 +2929,7 @@ MonoBehaviour:
   forgetPasswordBtn: {fileID: 0}
   signOutBtn: {fileID: 0}
   errorMsgContent: {fileID: 0}
+  gameManager: {fileID: 0}
   transition: {fileID: 0}
   transitionTime: 1
 --- !u!4 &961170384
@@ -4492,8 +4493,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442753926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.85, y: -13.95, z: 4.48}
-  m_LocalScale: {x: 7.7684984, y: 9.950049, z: 7.1407337}
+  m_LocalPosition: {x: -8.4, y: -19.44, z: 4.48}
+  m_LocalScale: {x: 7.7684984, y: 0.7509203, z: 7.1407337}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

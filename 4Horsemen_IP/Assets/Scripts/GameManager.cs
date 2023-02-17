@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerScoreText4; //show current score in screen 4
     public static GameManager instance;
 
+    //variables
+
     //displayname
-    public TextMeshProUGUI displayName;
+    public TextMeshProUGUI userName;
 
     //pause menu
     public GameObject pauseMenu;
@@ -21,26 +23,25 @@ public class GameManager : MonoBehaviour
     //gameover menu
     public GameObject gameOverMenu;
 
-    //LogInMenu
+    //LogInMenus
     public GameObject logInPage;
     public GameObject signUpPage;
     public GameObject loggedInPage;
+    public GameObject inputFields;
 
     //firebase
     public AuthManager auth;
     public MyDatabase firebaseMgr;
     public bool isPlayerStatUpdated;
-    public int xpPerGame = 5;
 
     //timer
     //float currentTime = 0;
-    public float startingTime;
     public TextMeshProUGUI countdownText;
 
 
     void Awake()
     {
-        displayName.text =  auth.GetCurrentUserDisplayName() + "!";
+        //userName.text =  auth.GetCurrentUserDisplayName() + "!";
 
         if(instance != null && instance != this)
         {
