@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
     }
     */
 
-    public void UpdatePlayerStat(int score, int xp, int time)
+    public void UpdatePlayerStat(int room1, int room2, int room3, int time)
     {
-        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, score, xp, time, auth.GetCurrentUserDisplayName());
+        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, room1, room2, room3, time, auth.GetCurrentUserDisplayName());
     }
 
     public void ExistingAccount()

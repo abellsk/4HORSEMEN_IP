@@ -37,14 +37,14 @@ public class LeaderboardManager : MonoBehaviour
         //assign each value from list to the prefab text content
         foreach(Leaderboard lb in leaderboardlist)
         {
-            Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Highscore {2}", rankCounter, lb.userName, lb.highScore);
+            Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Time Spent {2}", rankCounter, lb.userName, lb.totalTimeSpent);
 
             //create prefabs in the position of tableContent
             GameObject entry = Instantiate(rowPrefab, tableContent);
             TextMeshProUGUI[] leaderboardDetails = entry.GetComponentsInChildren<TextMeshProUGUI>();
             leaderboardDetails[0].text = rankCounter.ToString();
             leaderboardDetails[1].text = lb.userName;
-            leaderboardDetails[2].text = lb.highScore.ToString();
+            leaderboardDetails[2].text = lb.totalTimeSpent.ToString();
 
             rankCounter++;
         }

@@ -10202,7 +10202,7 @@ GameObject:
   - component: {fileID: 1722217606}
   - component: {fileID: 1722217605}
   m_Layer: 0
-  m_Name: DatabaseManager
+  m_Name: FirebaseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
