@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     //LogInMenu
     public GameObject logInPage;
     public GameObject signUpPage;
+    public GameObject loggedInPage;
 
     //firebase
     public AuthManager auth;
@@ -39,7 +40,17 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        displayName.text = "Player: " + auth.GetCurrentUserDisplayName();
+        displayName.text =  auth.GetCurrentUserDisplayName() + "!";
+
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
     }
 
     /*

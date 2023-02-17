@@ -28,6 +28,10 @@ public class AuthManager : MonoBehaviour
 
     public TextMeshProUGUI errorMsgContent;
 
+
+
+    public static GameManager instance;
+
     //transition
     public Animator transition;
     public float transitionTime = 1f;
@@ -65,7 +69,9 @@ public class AuthManager : MonoBehaviour
                 string username = usernameInput.text;
                 await CreateNewSimplePlayer(newPlayer.UserId, username, username, newPlayer.Email);
                 await UpdatePlayerDisplayName(username);
-                StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+                GameManager.instance.signUpPage.SetActive(false);
+                GameManager.instance.loggedInPage.SetActive(true);
+                //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
             }   
         }
         else
@@ -101,6 +107,8 @@ public class AuthManager : MonoBehaviour
                 errorMsgContent.gameObject.SetActive(false);
                 newPlayer = task.Result;
                 Debug.LogFormat("Welcome to the game {0} {1} ", newPlayer.UserId, newPlayer.Email);
+                GameManager.instance.signUpPage.gameObject.SetActive(false);
+                GameManager.instance.loggedInPage.gameObject.SetActive(true);
                 // do anything you want after player creation eg. create new player
             }
 
@@ -143,7 +151,9 @@ public class AuthManager : MonoBehaviour
                     errorMsgContent.gameObject.SetActive(false);
                     FirebaseUser currentPlayer = task.Result;
                     Debug.LogFormat("Welcome to NBA2K {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
-                    StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+                    GameManager.instance.logInPage.SetActive(false);
+                    GameManager.instance.loggedInPage.SetActive(true);
+                    //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
                 }
             });
         }
