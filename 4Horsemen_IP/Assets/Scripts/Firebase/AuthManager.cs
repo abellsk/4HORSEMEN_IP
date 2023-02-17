@@ -9,7 +9,7 @@ using Firebase.Extensions;
 using Firebase.Database;
 
 using System.Text.RegularExpressions;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine.SceneManagement;
 using System;
 
