@@ -2511,6 +2511,7 @@ GameObject:
   - component: {fileID: 637242954}
   - component: {fileID: 637242953}
   - component: {fileID: 637242952}
+  - component: {fileID: 637242956}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -2597,6 +2598,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &637242956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637242951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a09e32fd1f2d049887dc65574ff1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textTimer: {fileID: 1159724472}
 --- !u!1 &790349997
 GameObject:
   m_ObjectHideFlags: 0
