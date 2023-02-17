@@ -2085,7 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletOrigin: {fileID: 2120944749}
-  bulletPrefab: {fileID: 3483229533219762952, guid: 59ce436930184714999e6960bd90c5e6,
+  bulletPrefab: {fileID: 7810226882568783004, guid: 59ce436930184714999e6960bd90c5e6,
     type: 3}
 --- !u!4 &730277338 stripped
 Transform:
