@@ -22,7 +22,8 @@ public class SocketChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log(numberAnsCorrect);
+        Debug.Log(GetComponent<Collider>().gameObject);
     }
 
     // Update is called once per frame
@@ -32,14 +33,16 @@ public class SocketChecker : MonoBehaviour
         {
             theKey.SetActive(true);
         }
+        
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (theToken == collider.gameObject)
+        if (theToken == theToken)
         {
             numberAnsCorrect++;
         }
+        Debug.Log(numberAnsCorrect);
     }
     void OnTriggerExit(Collider collider)
     {
@@ -47,5 +50,6 @@ public class SocketChecker : MonoBehaviour
         {
             numberAnsCorrect--;
         }
+        Debug.Log(numberAnsCorrect);
     }
 }
