@@ -11,7 +11,6 @@ public class PlayerStats
     public int timeSpentRoom1;
     public int timeSpentRoom2;
     public int timeSpentRoom3;
-    //public int highscore;
     public long updatedOn;
     public long createdOn;
 

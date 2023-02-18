@@ -19,6 +19,7 @@ public class AuthManager : MonoBehaviour
 
     FirebaseAuth auth;
     DatabaseReference dbReference;
+    DatabaseReference dbPlayersRef;
     public TMP_InputField emailField;
     public TMP_InputField passwordField;
     public TMP_InputField usernameInput;
@@ -47,6 +48,7 @@ public class AuthManager : MonoBehaviour
     {
         auth = FirebaseAuth.DefaultInstance;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        dbPlayersRef = FirebaseDatabase.DefaultInstance.GetReference("players");
 
     }
 
@@ -135,36 +137,6 @@ public class AuthManager : MonoBehaviour
         return auth.CurrentUser.DisplayName;
     }
 
-    public void GetCurrentUserName()
-    {
-        Query playerQuery = dbReference.Child(GameManager.instance.userName.text);
-        playerQuery.GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            
-            if (task.IsFaulted || task.IsCanceled)
-            {
-                Debug.LogError("sorry, there has been an error retrieving your data, Error: " + task.Exception);
-
-            }
-            else if (task.IsCompleted)
-            {
-                DataSnapshot players = task.Result;
-                Debug.Log(players.ChildrenCount); // returns "1", (it should be "3")
-
-                if (players.Exists)
-                {
-                    PlayerStats uN = JsonUtility.FromJson<PlayerStats>(players.GetRawJsonValue());
-                    string username = uN.userName;
-                    Debug.Log(GameManager.instance.userName.text);
-                    gameManager.loggedInPage.SetActive(true);
-                    gameManager.userName.text = username + "!";
-                    gameManager.logInPage.SetActive(false);
-                    gameManager.inputFields.SetActive(false);
-                }
-
-            }
-        });
-    }
     public void LogInUser()
     {
         //Debug.Log("Logging In method...");
@@ -187,7 +159,10 @@ public class AuthManager : MonoBehaviour
                     errorMsgContent.gameObject.SetActive(false);
                     FirebaseUser currentPlayer = task.Result;
                     Debug.LogFormat("Welcome to Escape The Room {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
-                    GetCurrentUserName();
+                    gameManager.userName.text = GetCurrentUserDisplayName() + "!";
+                    gameManager.loggedInPage.SetActive(true);
+                    gameManager.logInPage.SetActive(false);
+                    gameManager.inputFields.SetActive(false);
                     //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
                 }
             });
