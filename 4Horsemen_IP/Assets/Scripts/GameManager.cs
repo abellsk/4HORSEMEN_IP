@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     //variables
+    private int totalTime;
+    private int timeInRoom1;
+    private int timeInRoom2;
+    private int timeInRoom3;
+
+    //timer
+    public TextMeshProUGUI textTimer;
+    private float timer = 0.0f;
+    private bool isTimer = true;
+
 
     //displayname
     public TextMeshProUGUI userName;
@@ -33,6 +44,7 @@ public class GameManager : MonoBehaviour
     public AuthManager auth;
     public MyDatabase firebaseMgr;
     public bool isPlayerStatUpdated;
+    private bool isPlayerStatsUpdated;
 
     //timer
     //float currentTime = 0;
@@ -41,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+
+        DisplayTime();
         //userName.text =  auth.GetCurrentUserDisplayName() + "!";
 
         if(instance != null && instance != this)
@@ -51,6 +65,21 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (isTimer)
+        {
+            timer += Time.deltaTime;
+            DisplayTime();
         }
     }
 
@@ -75,9 +104,20 @@ public class GameManager : MonoBehaviour
     }
     */
 
-    public void UpdatePlayerStat(int room1, int room2, int room3, int time)
+    public void StartGame()
     {
-        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, room1, room2, room3, time, auth.GetCurrentUserDisplayName());
+        isPlayerStatsUpdated = false;
+
+    }
+
+    public void NextLevel()
+    {
+
+    }
+
+    public void UpdatePlayerStat(int sRoom1, int sRoom2, int sRoom3, int time)
+    {
+        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, sRoom1, sRoom2, sRoom3, time, auth.GetCurrentUserDisplayName());
     }
 
     public void ExistingAccount()
@@ -91,5 +131,18 @@ public class GameManager : MonoBehaviour
         logInPage.SetActive(false);
         signUpPage.SetActive(true);
     }
-  
+
+    public void DisplayTime()
+    {
+        int minutes = Mathf.FloorToInt(timer / 60.0f);
+        int seconds = Mathf.FloorToInt(timer - minutes * 60);
+        textTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void stopTimer()
+    {
+
+        timer = 0.0f;
+    }
+
 }
