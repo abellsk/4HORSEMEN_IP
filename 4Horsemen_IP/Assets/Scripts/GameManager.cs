@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private int timeInRoom1;
     private int timeInRoom2;
     private int timeInRoom3;
+    private int minutes;
+    private int seconds;
 
     //timer
     public TextMeshProUGUI textTimer;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        UpdatePlayerStat(timeInRoom1, timeInRoom2, timeInRoom3, totalTime);
     }
 
     // Update is called once per frame
@@ -136,8 +138,8 @@ public class GameManager : MonoBehaviour
 
     public void DisplayTime()
     {
-        int minutes = Mathf.FloorToInt(timer / 60.0f);
-        int seconds = Mathf.FloorToInt(timer - minutes * 60);
+        minutes = Mathf.FloorToInt(timer / 60.0f);
+        seconds = Mathf.FloorToInt(timer - minutes * 60);
         textTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
