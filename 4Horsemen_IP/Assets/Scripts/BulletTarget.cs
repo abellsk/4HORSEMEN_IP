@@ -8,45 +8,28 @@ public class BulletTarget : MonoBehaviour
 {
     public GameObject targetShot;
     public GameObject targetShot2;
-    public GameObject targetShot3;
-    public static int targetDown = 0;
-    bool allDead = false;
+    public static GameManager instance;
+    //bool allDead = false;
+
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Target")
         {
             Debug.Log("Target has been hit");
-            Destroy(GameObject.FindWithTag("Target"));
-            targetDown++;
-            //GameManager.instance.showText();
+            Destroy(collision.gameObject);
+            GameManager.instance.shootScore();
         }
         if (collision.gameObject.tag == "Target1")
         {
-            Debug.Log("Target has been hit");
-            targetDown++;
+            Destroy(collision.gameObject);
+            Debug.Log("Target 1 has been hit");
+            GameManager.instance.shootScore();
         }
         if (collision.gameObject.tag == "Target2")
         {
-            Debug.Log("Target has been hit");
-            targetDown++;
+            Destroy(collision.gameObject);
+            Debug.Log("Target 2 has been hit");
+            GameManager.instance.shootScore();
         }
-        if (collision.gameObject.tag == "playarea")
-        {
-            Debug.Log("Target has hit the floor");
-        }
-    }
-
-    void checkTargets()
-    {
-        if (targetDown >= 3)
-        {
-            allDead = true;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("Target has hit the floor");
     }
 }

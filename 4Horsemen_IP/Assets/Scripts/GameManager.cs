@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerScoreText4; //show current score in screen 4
     public static GameManager instance;
 
+    int targetScore = 0;
+
     //variables
     private int totalTime;
     private int timeInRoom1;
@@ -141,8 +143,16 @@ public class GameManager : MonoBehaviour
 
     public void stopTimer()
     {
-
         timer = 0.0f;
+    }
+
+    public void shootScore()
+    {
+        targetScore++;
+        playerScoreText1.text = targetScore.ToString();
+        playerScoreText2.text = targetScore.ToString();
+        playerScoreText3.text = targetScore.ToString();
+        playerScoreText4.text = targetScore.ToString();
     }
 
 }
