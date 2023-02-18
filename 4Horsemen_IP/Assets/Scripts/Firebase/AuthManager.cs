@@ -185,10 +185,9 @@ public class AuthManager : MonoBehaviour
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
             auth.SignOut();
-            if (currentSceneIndex != 0)
-            {
-                SceneManager.LoadScene(0);
-            }
+            gameManager.loggedInPage.SetActive(false);
+            gameManager.logInPage.SetActive(true);
+            gameManager.inputFields.SetActive(true);
         }
     }
 
