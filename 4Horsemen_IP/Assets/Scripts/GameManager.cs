@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
     [Header("Keypad Entry Events")]
     public UnityEvent onCorrectPassword;
     public UnityEvent onIncorrectPassword;
-    public bool HasUsedCorrectCode { get { return HasUsedCorrectCode; } }
+    private bool hasUsedCorrectCode = false;
+    public bool allowMultipleActivations = false;
+    public bool HasUsedCorrectCode { get { return hasUsedCorrectCode; } }
     [Header("Buttons")]
     public Animator Button1;
     public Animator Button2;
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     public Animator Button7;
     public Animator Button8;
     public Animator Button9;
+
+    public Animator CameraFall;
 
     //timer
     [Header("others")]
@@ -88,6 +92,8 @@ public class GameManager : MonoBehaviour
     //room2Interacables
     public GameObject roomTwoDoor;
     public GameObject checkeredFloor;
+
+    [SerializeField] private AudioSource buttonBeep;
 
 
     void Awake()
@@ -225,38 +231,47 @@ public class GameManager : MonoBehaviour
             if (selectedNum == 1)
             {
                 Button1.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 2)
             {
                 Button2.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 3)
             {
                 Button3.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 4)
             {
                 Button4.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 5)
             {
                 Button5.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 6)
             {
                 Button6.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 7)
             {
                 Button7.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 8)
             {
                 Button8.Play("ButtonPressed");
+                buttonBeep.Play();
             }
             else if (selectedNum == 9)
             {
                 Button9.Play("ButtonPressed");
+                buttonBeep.Play();
             }
         }
         if(inputPasswordList.Count >= 4) 
@@ -277,7 +292,28 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+        correctPasswordGiven();
     }
+
+    private void correctPasswordGiven()
+    {
+        if (allowMultipleActivations)
+        {
+            onCorrectPassword.Invoke();
+            StartCoroutine(ResetKeycode());
+        }
+        else if(!allowMultipleActivations && !hasUsedCorrectCode)
+        {
+            onCorrectPassword.Invoke();
+            hasUsedCorrectCode = true;
+            codeDisplay.text = successText;
+
+            checkeredFloor.gameObject.SetActive(false);
+            CameraFall.Play("Falling");
+            StartCoroutine(NextScene());
+        }
+    }
+
 
     private void IncorrectPassword()
     {
@@ -310,6 +346,13 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateDisplay();
+    }
+
+    IEnumerator NextScene()
+    {
+        yield return new WaitForSeconds(resetTime);
+
+        NextLevel();
     }
 
     IEnumerator ResetKeycode() 

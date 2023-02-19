@@ -5,8 +5,6 @@ using UnityEngine;
 public class ButtonAnim : MonoBehaviour
 {
 
-    public static ButtonAnim instance;
-
     public void PlayAnimation()
     {
         GetComponent<Animator>().Play("ButtonPressed");
