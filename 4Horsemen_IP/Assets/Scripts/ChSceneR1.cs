@@ -7,7 +7,10 @@ public class ChSceneR1 : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        GameManager.instance.NextLevel();
+        if (other.tag == "Player")
+        {
+            GameManager.instance.NextLevel();
+        }
     }
         
 }

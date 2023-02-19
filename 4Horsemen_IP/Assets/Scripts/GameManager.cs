@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
-        DisplayTime();
+        StartTimer();
         //userName.text =  auth.GetCurrentUserDisplayName() + "!";
 
         if(instance != null && instance != this)
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
+        //UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
     // Update is called once per frame
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
         if (isTimer)
         {
             timer += Time.deltaTime;
-            DisplayTime();
+            StartTimer();
         }
     }
 
@@ -121,12 +122,13 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
+        stopTimer();
+        UpdatePlayerStat(totalTime, timeInRoom1, timeInRoom2, timeInRoom3, secondsInRoom1, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
-    public void UpdatePlayerStat(string room1, int sRoom1, int sRoom2, int sRoom3, int time)
+    public void UpdatePlayerStat(string time, string room1, string room2, string room3, int sRoom1, int sRoom2, int sRoom3, int stime)
     {
-        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, room1, sRoom1, sRoom2, sRoom3, time, auth.GetCurrentUserDisplayName());
+        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, time, room1, room2, room3, sRoom1, sRoom2, sRoom3, stime, auth.GetCurrentUserDisplayName());
     }
 
     public void ExistingAccount()
@@ -141,11 +143,15 @@ public class GameManager : MonoBehaviour
         signUpPage.SetActive(true);
     }
 
-    public void DisplayTime()
+    public void StartTimer()
     {
         minutes = Mathf.FloorToInt(timer / 60.0f);
         seconds = Mathf.FloorToInt(timer - minutes * 60);
         textTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        secondsInRoom1 = Mathf.RoundToInt(timer);
+        secondsInRoom2 = Mathf.RoundToInt(timer);
+        secondsInRoom3 = Mathf.RoundToInt(timer);
+
 
     }
 
