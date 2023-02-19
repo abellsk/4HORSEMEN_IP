@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     //numberpad
     public List<int> correctPassword = new List<int>();
     private List<int> inputPasswordList = new List<int>();
+    public TMP_InputField incorrectText;
     [SerializeField] public TextMeshProUGUI codeDisplay;
     [SerializeField] private float resetTime = 2f;
     [SerializeField] private string successText;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     public Animator Button9;
 
     //timer
-    [Header("TimerTools")]
+    [Header("others")]
     public TextMeshProUGUI textTimerRoom1;
     public TextMeshProUGUI textTimerRoom2;
     public TextMeshProUGUI textTimerRoom3;
@@ -243,10 +244,32 @@ public class GameManager : MonoBehaviour
                 Button9.Play("ButtonPressed");
             }
         }
+        if(inputPasswordList.Count >= 4) 
+        {
+            CheckPassword();
+        }
         UpdateDisplay();
 
-        
+    }
 
+    private void CheckPassword()
+    {
+        for (int i = 0; i < correctPassword.Count; i++)
+        {
+            if (inputPasswordList[i] != correctPassword[i]) 
+            {
+                IncorrectPassword();
+                return;
+            }
+        }
+    }
+
+    private void IncorrectPassword()
+    {
+        codeDisplay.gameObject.SetActive(false);
+        incorrectText.gameObject.SetActive(true);
+        onIncorrectPassword.Invoke();
+        StartCoroutine(ResetKeycode());
     }
 
     private void UpdateDisplay()
@@ -272,6 +295,16 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateDisplay();
+    }
+
+    IEnumerator ResetKeycode() 
+    {
+        yield return new WaitForSeconds(resetTime);
+
+        inputPasswordList.Clear();
+        incorrectText.gameObject.SetActive(false);
+        codeDisplay.gameObject.SetActive(true);
+        codeDisplay.text = "0000";
     }
 
 }
