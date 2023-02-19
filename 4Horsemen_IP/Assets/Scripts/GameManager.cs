@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,7 +28,29 @@ public class GameManager : MonoBehaviour
     private int minutes;
     private int seconds;
 
+    //numberpad
+    public List<int> correctPassword = new List<int>();
+    private List<int> inputPasswordList = new List<int>();
+    [SerializeField] public TextMeshProUGUI codeDisplay;
+    [SerializeField] private float resetTime = 2f;
+    [SerializeField] private string successText;
+    [Header("Keypad Entry Events")]
+    public UnityEvent onCorrectPassword;
+    public UnityEvent onIncorrectPassword;
+    public bool HasUsedCorrectCode { get { return HasUsedCorrectCode; } }
+    [Header("Buttons")]
+    public Animator Button1;
+    public Animator Button2;
+    public Animator Button3;
+    public Animator Button4;
+    public Animator Button5;
+    public Animator Button6;
+    public Animator Button7;
+    public Animator Button8;
+    public Animator Button9;
+
     //timer
+    [Header("TimerTools")]
     public TextMeshProUGUI textTimerRoom1;
     public TextMeshProUGUI textTimerRoom2;
     public TextMeshProUGUI textTimerRoom3;
@@ -171,6 +194,84 @@ public class GameManager : MonoBehaviour
         playerScoreText2.text = targetScore.ToString();
         playerScoreText3.text = targetScore.ToString();
         playerScoreText4.text = targetScore.ToString();
+    }
+
+    public void UserNumberEntry(int selectedNum)
+    {
+        if (inputPasswordList.Count >= 4)
+        {
+            return;
+        }
+
+        else
+        {
+            inputPasswordList.Add(selectedNum);
+            if (selectedNum == 1)
+            {
+                Button1.Play("ButtonPressed");
+            }
+            else if (selectedNum == 2)
+            {
+                Button2.Play("ButtonPressed");
+            }
+            else if (selectedNum == 3)
+            {
+                Button3.Play("ButtonPressed");
+            }
+            else if (selectedNum == 4)
+            {
+                Button4.Play("ButtonPressed");
+            }
+            else if (selectedNum == 5)
+            {
+                Button5.Play("ButtonPressed");
+            }
+            else if (selectedNum == 6)
+            {
+                Button6.Play("ButtonPressed");
+            }
+            else if (selectedNum == 7)
+            {
+                Button7.Play("ButtonPressed");
+            }
+            else if (selectedNum == 8)
+            {
+                Button8.Play("ButtonPressed");
+            }
+            else if (selectedNum == 9)
+            {
+                Button9.Play("ButtonPressed");
+            }
+        }
+        UpdateDisplay();
+
+        
+
+    }
+
+    private void UpdateDisplay()
+    {
+        codeDisplay.text = null;
+        for (int i = 0; i < inputPasswordList.Count; i++)
+        {
+            codeDisplay.text += inputPasswordList[i];
+        }
+
+    }
+
+    public void DeleteEntry()
+    {
+        if(inputPasswordList.Count <= 0) 
+        { 
+            return;
+        }
+        else
+        {
+            var listposition = inputPasswordList.Count - 1;
+            inputPasswordList.RemoveAt(listposition);
+        }
+
+        UpdateDisplay();
     }
 
 }
