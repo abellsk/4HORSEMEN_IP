@@ -2673,9 +2673,6 @@ MonoBehaviour:
   Button8: {fileID: 0}
   Button9: {fileID: 0}
   CameraFall: {fileID: 0}
-  textTimerRoom1: {fileID: 0}
-  textTimerRoom2: {fileID: 0}
-  textTimerRoom3: {fileID: 0}
   userName: {fileID: 0}
   pauseMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
@@ -5009,6 +5006,37 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 567541675789026129, guid: 15b526339c3164941a41b1e5ce361067, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 15b526339c3164941a41b1e5ce361067, type: 3}
+--- !u!1 &1384867897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 567541675789026138, guid: 15b526339c3164941a41b1e5ce361067,
+    type: 3}
+  m_PrefabInstance: {fileID: 1384867896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1384867898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 567541676319895717, guid: 15b526339c3164941a41b1e5ce361067,
+    type: 3}
+  m_PrefabInstance: {fileID: 1384867896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1384867899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384867897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f69539da2743747847508b69672552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textTimer: {fileID: 1384867898}
 --- !u!1001 &1387599363
 PrefabInstance:
   m_ObjectHideFlags: 0

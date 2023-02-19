@@ -56,11 +56,7 @@ public class GameManager : MonoBehaviour
 
     //timer
     [Header("others")]
-    public TextMeshProUGUI textTimerRoom1;
-    public TextMeshProUGUI textTimerRoom2;
-    public TextMeshProUGUI textTimerRoom3;
-    private float timer = 0.0f;
-    private bool isTimer = true;
+    
 
 
     //displayname
@@ -98,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        StartTimer();
+        //StartTimer();
         //userName.text =  auth.GetCurrentUserDisplayName() + "!";
 
         if(instance != null && instance != this)
@@ -115,17 +111,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isTimer)
-        {
-            timer += Time.deltaTime;
-            StartTimer();
-        }
-        checkScore();
     }
 
     /*
@@ -152,13 +137,13 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isPlayerStatsUpdated = false;
-        isTimer = true;
+        //isTimer = true;
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        ResetTimer();
+        //ResetTimer();
         UpdatePlayerStat(totalTime, timeInRoom1, timeInRoom2, timeInRoom3, secondsInRoom1, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
@@ -179,24 +164,7 @@ public class GameManager : MonoBehaviour
         signUpPage.SetActive(true);
     }
 
-    public void StartTimer()
-    {
-        minutes = Mathf.FloorToInt(timer / 60.0f);
-        seconds = Mathf.FloorToInt(timer - minutes * 60);
-        textTimerRoom1.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        textTimerRoom2.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        //textTimerRoom3.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        secondsInRoom1 = Mathf.RoundToInt(timer);
-        secondsInRoom2 = Mathf.RoundToInt(timer);
-        secondsInRoom3 = Mathf.RoundToInt(timer);
-
-
-    }
-
-    public void ResetTimer()
-    {
-        timer = 0.0f;
-    }
+    
 
 
     public void shootScore()
