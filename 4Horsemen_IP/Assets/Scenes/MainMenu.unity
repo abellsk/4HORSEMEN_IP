@@ -1137,7 +1137,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
@@ -9552,7 +9552,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetShot: {fileID: 92751219}
   targetShot2: {fileID: 1508440923}
-  targetShot3: {fileID: 268570023}
 --- !u!1 &1973285114
 GameObject:
   m_ObjectHideFlags: 0
