@@ -4003,7 +4003,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 567541675789026129, guid: 15b526339c3164941a41b1e5ce361067, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 15b526339c3164941a41b1e5ce361067, type: 3}
 --- !u!1 &1287808899
 GameObject:
