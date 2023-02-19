@@ -9,7 +9,7 @@ public class ChSceneR1 : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.instance.NextLevel();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
         
