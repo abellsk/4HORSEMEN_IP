@@ -85,8 +85,9 @@ public class GameManager : MonoBehaviour
     //float currentTime = 0;
     public TextMeshProUGUI countdownText;
 
-    //room2Door
+    //room2Interacables
     public GameObject roomTwoDoor;
+    public GameObject checkeredFloor;
 
 
     void Awake()
@@ -207,6 +208,7 @@ public class GameManager : MonoBehaviour
         if (targetScore == 3)
         {
             roomTwoDoor.SetActive(false);
+            checkeredFloor.SetActive(false);
         }
     }
 
