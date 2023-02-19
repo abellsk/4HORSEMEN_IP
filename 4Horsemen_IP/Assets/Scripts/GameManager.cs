@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
     private int seconds;
 
     //timer
-    public TextMeshProUGUI textTimer;
+    public TextMeshProUGUI textTimerRoom1;
+    public TextMeshProUGUI textTimerRoom2;
+    public TextMeshProUGUI textTimerRoom3;
     private float timer = 0.0f;
     private bool isTimer = true;
 
@@ -62,7 +64,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
         StartTimer();
         //userName.text =  auth.GetCurrentUserDisplayName() + "!";
 
@@ -116,13 +117,13 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isPlayerStatsUpdated = false;
-
+        isTimer = true;
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        stopTimer();
+        ResetTimer();
         UpdatePlayerStat(totalTime, timeInRoom1, timeInRoom2, timeInRoom3, secondsInRoom1, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
@@ -147,7 +148,9 @@ public class GameManager : MonoBehaviour
     {
         minutes = Mathf.FloorToInt(timer / 60.0f);
         seconds = Mathf.FloorToInt(timer - minutes * 60);
-        textTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        textTimerRoom1.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        textTimerRoom2.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        //textTimerRoom3.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         secondsInRoom1 = Mathf.RoundToInt(timer);
         secondsInRoom2 = Mathf.RoundToInt(timer);
         secondsInRoom3 = Mathf.RoundToInt(timer);
@@ -155,10 +158,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void stopTimer()
+    public void ResetTimer()
     {
         timer = 0.0f;
     }
+
 
     public void shootScore()
     {

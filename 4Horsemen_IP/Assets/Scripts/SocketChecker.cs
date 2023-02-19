@@ -6,6 +6,7 @@ public class SocketChecker : MonoBehaviour
 {
     public GameObject theToken;
     public GameObject theKey;
+    private bool isTriggered = false;
     //public GameObject tokenTwo;
     //public GameObject tokenThree;
     //public GameObject tokenFour;
@@ -17,39 +18,50 @@ public class SocketChecker : MonoBehaviour
 
     //public List<GameObject> tokens;
 
-    private int numberAnsCorrect = 0;
+    public int numberAnsCorrect = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(numberAnsCorrect);
-        Debug.Log(GetComponent<Collider>().gameObject);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numberAnsCorrect >= 9)
+        scoreAdder();
+        if (numberAnsCorrect < 9)
         {
             theKey.SetActive(true);
         }
-        
     }
 
     void OnTriggerEnter(Collider collider)
-    {
+    {  
         if (theToken == theToken)
         {
-            numberAnsCorrect++;
+            isTriggered = true;
+            Debug.Log("Token is at the correct place");
         }
-        Debug.Log(numberAnsCorrect);
+        else
+        {
+            Debug.Log("Token salah");
+        }
     }
+
     void OnTriggerExit(Collider collider)
     {
-        if (theToken == collider.gameObject)
-        {
-            numberAnsCorrect--;
-        }
-        Debug.Log(numberAnsCorrect);
+        //hrllo
     }
+
+    void scoreAdder()
+    {
+        if (isTriggered)
+        {
+            numberAnsCorrect++;
+            isTriggered = false;
+            Debug.Log(numberAnsCorrect);
+        }
+    }
+
 }
