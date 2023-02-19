@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Firebase.Extensions;
 using System;
 using JetBrains.Annotations;
+using UnityEditor.Rendering;
 
 public class MyDatabase : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class MyDatabase : MonoBehaviour
 
     }
     //create a new entry if it is the first time playing and update if there already is one
-    public void UpdatePlayerStats(string uuid, int room1, int room2, int room3, int time, string userName)
+    public void UpdatePlayerStats(string uuid, string room1, int sRoom1, int room2, int room3, int time, string userName)
     {
         Query playerQuery = dbPlayerStatsReference.Child(uuid);
 
@@ -54,21 +55,23 @@ public class MyDatabase : MonoBehaviour
                 {
                     //creating a temp object sp which stores info from the player stats
                     PlayerStats sp = JsonUtility.FromJson<PlayerStats>(playerStats.GetRawJsonValue());
+                    sp.secondsSpentRoom1 += sRoom1;
                     sp.timeSpentRoom1 += room1;
                     sp.timeSpentRoom2 += room2;
                     sp.timeSpentRoom3 += room3;
-                    sp.totalTimeSpent += time;
+                    sp.totalSecondsSpent += time;
                     //sp.updatedOn = sp.GetTimeUnix();
                     //sp.updatedOn = sp.GetTimeUnix();
                     
                     //check if new high score
-                    if(room1 < sp.timeSpentRoom1 || room2 < sp.timeSpentRoom2 || room3 < sp.timeSpentRoom3 || time < sp.totalTimeSpent )
+                    if(sRoom1 < sp.secondsSpentRoom1 || room2 < sp.timeSpentRoom2 || room3 < sp.timeSpentRoom3 || time < sp.totalSecondsSpent )
                     {
+                        sp.secondsSpentRoom1 = sRoom1;
                         sp.timeSpentRoom1 = room1;
                         sp.timeSpentRoom2 = room2;
                         sp.timeSpentRoom3 = room3;
-                        sp.totalTimeSpent = time;
-                        UpdatePlayerLeaderboardEntry(uuid, sp.timeSpentRoom1, sp.timeSpentRoom2, sp.timeSpentRoom3, sp.totalTimeSpent, sp.updatedOn);
+                        sp.totalSecondsSpent = time;
+                        UpdatePlayerLeaderboardEntry(uuid, sp.secondsSpentRoom1, sp.timeSpentRoom2, sp.timeSpentRoom3, sp.totalSecondsSpent, sp.updatedOn);
                     }
 
                     //path: playerStats/$uuid
@@ -76,9 +79,9 @@ public class MyDatabase : MonoBehaviour
                 }
                 else
                 {
-                    PlayerStats sp = new PlayerStats(userName, room1, room2, room3, time);
+                    PlayerStats sp = new PlayerStats(userName, room1, sRoom1, room2, room3, time);
                     
-                    PlayerStats lb = new PlayerStats(userName, room1, room2, room3);
+                    PlayerStats lb = new PlayerStats(userName, room1, sRoom1, room2, room3);
 
                     dbPlayerStatsReference.Child(uuid).SetRawJsonValueAsync(sp.PlayerStatsToJson());
                     dbLeaderboardsReference.Child(uuid).SetRawJsonValueAsync(lb.PlayerStatsToJson());

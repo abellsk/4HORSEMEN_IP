@@ -15,10 +15,14 @@ public class GameManager : MonoBehaviour
     int targetScore = 0;
 
     //variables
-    private int totalTime;
-    private int timeInRoom1;
-    private int timeInRoom2;
-    private int timeInRoom3;
+    private int totalSeconds;
+    private int secondsInRoom1;
+    private int secondsInRoom2;
+    private int secondsInRoom3;
+    private string timeInRoom1;
+    private string timeInRoom2;
+    private string timeInRoom3;
+    private string totalTime;
     private int minutes;
     private int seconds;
 
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdatePlayerStat(timeInRoom1, timeInRoom2, timeInRoom3, totalTime);
+        UpdatePlayerStat(timeInRoom1, secondsInRoom1, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
     // Update is called once per frame
@@ -119,9 +123,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdatePlayerStat(int sRoom1, int sRoom2, int sRoom3, int time)
+    public void UpdatePlayerStat(string room1, int sRoom1, int sRoom2, int sRoom3, int time)
     {
-        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, sRoom1, sRoom2, sRoom3, time, auth.GetCurrentUserDisplayName());
+        firebaseMgr.UpdatePlayerStats(auth.GetCurrentUser().UserId, room1, sRoom1, sRoom2, sRoom3, time, auth.GetCurrentUserDisplayName());
     }
 
     public void ExistingAccount()
@@ -141,6 +145,7 @@ public class GameManager : MonoBehaviour
         minutes = Mathf.FloorToInt(timer / 60.0f);
         seconds = Mathf.FloorToInt(timer - minutes * 60);
         textTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
     }
 
     public void stopTimer()
