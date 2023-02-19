@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
     //float currentTime = 0;
     public TextMeshProUGUI countdownText;
 
+    //room2Door
+    public GameObject roomTwoDoor;
+
 
     void Awake()
     {
@@ -115,6 +118,7 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             StartTimer();
         }
+        checkScore();
     }
 
     /*
@@ -191,10 +195,19 @@ public class GameManager : MonoBehaviour
     public void shootScore()
     {
         targetScore++;
+        Debug.Log(targetScore);
         playerScoreText1.text = targetScore.ToString();
         playerScoreText2.text = targetScore.ToString();
         playerScoreText3.text = targetScore.ToString();
         playerScoreText4.text = targetScore.ToString();
+    }
+
+    public void checkScore()
+    {
+        if (targetScore == 3)
+        {
+            roomTwoDoor.SetActive(false);
+        }
     }
 
     public void UserNumberEntry(int selectedNum)
