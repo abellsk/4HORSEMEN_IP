@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdatePlayerStat(timeInRoom1, secondsInRoom1, secondsInRoom2, secondsInRoom3, totalSeconds);
+        UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
     // Update is called once per frame
@@ -120,7 +120,8 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
     public void UpdatePlayerStat(string room1, int sRoom1, int sRoom2, int sRoom3, int time)
