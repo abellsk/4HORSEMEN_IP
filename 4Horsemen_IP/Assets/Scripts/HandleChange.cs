@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChSceneR2 : MonoBehaviour
+public class HandleChange : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+
+    public GameObject Handle;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(Handle)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

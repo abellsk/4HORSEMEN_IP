@@ -7,6 +7,7 @@ TagManager:
   - Target
   - Target1
   - Target2
+  - Handle
   layers:
   - Default
   - TransparentFX
