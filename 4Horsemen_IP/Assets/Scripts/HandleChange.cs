@@ -8,7 +8,7 @@ public class HandleChange : MonoBehaviour
 
     public GameObject Handle;
 
-    private void OnTriggerEnter(Collider other)
+    public void EndGame()
     {
         if(Handle)
         {

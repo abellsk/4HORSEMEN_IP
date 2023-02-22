@@ -8,6 +8,10 @@ TagManager:
   - Target1
   - Target2
   - Handle
+  - t1
+  - t2
+  - t3
+  - t4
   layers:
   - Default
   - TransparentFX
