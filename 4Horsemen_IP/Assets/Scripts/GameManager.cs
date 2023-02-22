@@ -28,34 +28,9 @@ public class GameManager : MonoBehaviour
     private int minutes;
     private int seconds;
 
-    //numberpad
-    public List<int> correctPassword = new List<int>();
-    private List<int> inputPasswordList = new List<int>();
-    public TMP_InputField incorrectText;
-    [SerializeField] public TextMeshProUGUI codeDisplay;
-    [SerializeField] private float resetTime = 2f;
-    [SerializeField] private string successText;
-    [Header("Keypad Entry Events")]
-    public UnityEvent onCorrectPassword;
-    public UnityEvent onIncorrectPassword;
-    private bool hasUsedCorrectCode = false;
-    public bool allowMultipleActivations = false;
-    public bool HasUsedCorrectCode { get { return hasUsedCorrectCode; } }
-    [Header("Buttons")]
-    public Animator Button1;
-    public Animator Button2;
-    public Animator Button3;
-    public Animator Button4;
-    public Animator Button5;
-    public Animator Button6;
-    public Animator Button7;
-    public Animator Button8;
-    public Animator Button9;
-
-    public Animator CameraFall;
 
     //timer
-    [Header("others")]
+    [Header("Others")]
     
 
 
@@ -79,7 +54,7 @@ public class GameManager : MonoBehaviour
     public AuthManager auth;
     public MyDatabase firebaseMgr;
     public bool isPlayerStatUpdated;
-    private bool isPlayerStatsUpdated;
+    //private bool isPlayerStatsUpdated;
 
     //timer
     //float currentTime = 0;
@@ -87,9 +62,7 @@ public class GameManager : MonoBehaviour
 
     //room2Interacables
     public GameObject roomTwoDoor;
-    public GameObject checkeredFloor;
 
-    [SerializeField] private AudioSource buttonBeep;
 
 
     void Awake()
@@ -113,30 +86,10 @@ public class GameManager : MonoBehaviour
         //UpdatePlayerStat(timeInRoom1, seconds, secondsInRoom2, secondsInRoom3, totalSeconds);
     }
 
-    /*
-    public void GameOver()
-    {
-        MoveSpeed = 0;
-        gameOverMenu.SetActive(true);
-        if (!isPlayerStatUpdated)
-        {
-            UpdatePlayerStat(scoreValue, xpPerGame, 30);
-        }
-
-    }
-
-    public void Retry()
-    {
-        scoreValue = 0;
-        gameOverMenu.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-    }
-    */
 
     public void StartGame()
     {
-        isPlayerStatsUpdated = false;
+        //isPlayerStatsUpdated = false;
         //isTimer = true;
     }
 
@@ -182,10 +135,10 @@ public class GameManager : MonoBehaviour
         if (targetScore == 3)
         {
             roomTwoDoor.SetActive(false);
-            checkeredFloor.SetActive(false);
         }
     }
 
+    /**
     public void UserNumberEntry(int selectedNum)
     {
         if (inputPasswordList.Count >= 4)
@@ -247,10 +200,10 @@ public class GameManager : MonoBehaviour
             CheckPassword();
         }
         UpdateDisplay();
-
     }
 
-    private void CheckPassword()
+
+    public void CheckPassword()
     {
         for (int i = 0; i < correctPassword.Count; i++)
         {
@@ -291,7 +244,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ResetKeycode());
     }
 
-    private void UpdateDisplay()
+    public void UpdateDisplay()
     {
         codeDisplay.text = null;
         for (int i = 0; i < inputPasswordList.Count; i++)
@@ -332,5 +285,6 @@ public class GameManager : MonoBehaviour
         codeDisplay.gameObject.SetActive(true);
         codeDisplay.text = "0000";
     }
+    **/
 
 }

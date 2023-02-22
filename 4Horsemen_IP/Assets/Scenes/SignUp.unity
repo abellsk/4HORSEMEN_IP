@@ -10792,7 +10792,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
@@ -11328,29 +11328,6 @@ MonoBehaviour:
   playerScoreText2: {fileID: 0}
   playerScoreText3: {fileID: 0}
   playerScoreText4: {fileID: 0}
-  correctPassword: 
-  incorrectText: {fileID: 0}
-  codeDisplay: {fileID: 0}
-  resetTime: 2
-  successText: 
-  onCorrectPassword:
-    m_PersistentCalls:
-      m_Calls: []
-  onIncorrectPassword:
-    m_PersistentCalls:
-      m_Calls: []
-  Button1: {fileID: 0}
-  Button2: {fileID: 0}
-  Button3: {fileID: 0}
-  Button4: {fileID: 0}
-  Button5: {fileID: 0}
-  Button6: {fileID: 0}
-  Button7: {fileID: 0}
-  Button8: {fileID: 0}
-  Button9: {fileID: 0}
-  textTimerRoom1: {fileID: 0}
-  textTimerRoom2: {fileID: 0}
-  textTimerRoom3: {fileID: 0}
   userName: {fileID: 695704710}
   pauseMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
@@ -11362,6 +11339,9 @@ MonoBehaviour:
   firebaseMgr: {fileID: 790349998}
   isPlayerStatUpdated: 0
   countdownText: {fileID: 0}
+  roomTwoDoor: {fileID: 0}
+  checkeredFloor: {fileID: 0}
+  buttonBeep: {fileID: 0}
 --- !u!4 &1881765463
 Transform:
   m_ObjectHideFlags: 0
