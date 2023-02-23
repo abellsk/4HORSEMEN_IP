@@ -72241,7 +72241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1649514223
 Transform:
   m_ObjectHideFlags: 0
@@ -101001,6 +101001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestKey: {fileID: 1930071367}
   Fire: {fileID: 1649514222}
+  dimLight: {fileID: 204768989}
   chestOpen: {fileID: 1523691802}
 --- !u!1001 &5530591048538790515
 PrefabInstance:

@@ -10,6 +10,7 @@ public class Room3 : MonoBehaviour
     private int tokenTracker;
     public GameObject chestKey;
     public GameObject Fire;
+    public GameObject dimLight;
 
     public Animator chestOpen;
 
@@ -20,6 +21,7 @@ public class Room3 : MonoBehaviour
         if (tokenTracker >= 9)
         {
             Fire.SetActive(false);
+            dimLight.SetActive(true);
             chestKey.SetActive(true);
         }
     }
@@ -28,5 +30,6 @@ public class Room3 : MonoBehaviour
     {
         chestOpen.Play("ChestOpen");
     }
+
 
 }
