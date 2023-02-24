@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     
 
-
+    /*
     public void shootScore()
     {
         targetScore++;
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         playerScoreText3.text = targetScore.ToString();
         playerScoreText4.text = targetScore.ToString();
     }
+    */
 
     public void checkScore()
     {

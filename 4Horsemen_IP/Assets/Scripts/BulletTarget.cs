@@ -17,19 +17,19 @@ public class BulletTarget : MonoBehaviour
         {
             Debug.Log("Target has been hit");
             Destroy(collision.gameObject);
-            GameManager.instance.shootScore();
+            //GameManager.instance.shootScore();
         }
         if (collision.gameObject.tag == "Target1")
         {
             Destroy(collision.gameObject);
             Debug.Log("Target 1 has been hit");
-            GameManager.instance.shootScore();
+            //GameManager.instance.shootScore();
         }
         if (collision.gameObject.tag == "Target2")
         {
             Destroy(collision.gameObject);
             Debug.Log("Target 2 has been hit");
-            GameManager.instance.shootScore();
+            //GameManager.instance.shootScore();
         }
     }
 }
